@@ -13,11 +13,21 @@ def main():
 
 def setParamsFromArgv():
     global VIDEO_FILE_PATH
-    VIDEO_FILE_PATH = sys.argv[1]
+    try:
+        VIDEO_FILE_PATH = sys.argv[1]
+    except IndexError:
+        print("Incorrect params")
+        sys.exit()
+
 
 def getAudioTrackFromVideo():
-    videoClip = VideoFileClip(VIDEO_FILE_PATH)
+    try:
+        videoClip = VideoFileClip(VIDEO_FILE_PATH)
+    except IOError:
+        print("Video file not found")
+        sys.exit()
     return videoClip.audio
+
 
 def writeAudioFile(audioClip):
     audioClip.write_audiofile("outputAudio.mp3")
