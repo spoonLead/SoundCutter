@@ -35,6 +35,10 @@ def getAudioTrackFromVideo():
 
 
 def writeAudioFile(audioClip):
-    audioClip.write_audiofile(AUDIO_FILE_PATH)
+    try:
+        audioClip.write_audiofile(AUDIO_FILE_PATH)
+    except ValueError:
+        print("Use an audio format for output audio file")
+        sys.exit()
 
 main()
